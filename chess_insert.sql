@@ -1,4 +1,4 @@
-
+\c chess
 INSERT into FEDERATION values( 'IND', 'India');
 INSERT into FEDERATION values( 'USA', 'United States of America');
 INSERT into FEDERATION values( 'CHN', 'China');
