@@ -6,6 +6,8 @@ create database chess;
  (	Country_code VARCHAR(10) NOT NULL,
  	Country CHAR(30),
 
+ 	UNIQUE(Country_code),
+
  	PRIMARY KEY (Country_code)
 
  	);
@@ -40,6 +42,8 @@ CREATE TABLE Endgame
 	Age INT,
 	Belongs_to VARCHAR(10) NOT NULL,
 	Name CHAR(30),
+
+	UNIQUE(FIDE_ID),
 
 	PRIMARY KEY (FIDE_ID),
 	FOREIGN KEY (Birth_year) REFERENCES Year(Year),      
