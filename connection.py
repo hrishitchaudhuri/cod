@@ -76,11 +76,20 @@ def get_tournament_from_position(cur, pos):
 
     cur.fetchall();
 
-conn = psycopg2.connect(
-    "dbname='chess' user='postgres' host='localhost' password='jasan'"
-)
+##############################################################################
 
-cursor = conn.cursor()
+def print_table(cur, table):
+    cur.execute("""
+        SELECT * FROM
+        """ + table)
+    return_list = cur.fetchall()
+    return [[str(j).strip() for j in i] for i in return_list]
+    # return [[i.strip(), j.strip()] for i, j in return_list]
 
-rows = get_tournament_from_position(cursor, "'5k2/ppp5/4P3/3R3p/6P1/1K2Nr2/PP3P2/8 b - - 1 32'")
-print(rows)
+
+def get_conn():
+    conn = psycopg2.connect(
+        "dbname='chess' user='postgres' host='localhost' password='myPassword'"
+    )
+    cursor = conn.cursor()
+    return cursor
