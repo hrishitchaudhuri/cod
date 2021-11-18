@@ -1,0 +1,11 @@
+appdirs==1.4.4
+blessed==1.19.0
+flyingcircus==0.1.4.0
+packaging==21.3
+psycopg2-binary==2.9.2
+pyparsing==3.0.6
+pytk==0.0.2.1
+setuptools-scm==6.3.2
+six==1.16.0
+tomli==1.2.2
+wcwidth==0.2.5
