@@ -27,6 +27,37 @@ def take_tbname():
     label_ins.config(text = "Table name: "+ tbn)
     t.display(print_table(cursor, tbn))
 
+
+def update_query():
+    tbn2 = tbname2.get(1.0, "end-1c")
+    col_to_set = setwhat.get(1.0, "end-1c")
+    cond_to_set = wherewhat.get(1.0, "end-1c")
+    label_ins.config(text = "Table name: "+ cond_to_set)
+
+    # sql_update_query = """Update %s set %s  where  %s"""
+    # cursor.execute(sql_update_query, (tbn2, col_to_set, cond_to_set))
+    # connection.commit()
+    # count = cursor.rowcount
+    # print(count, "Record Updated successfully ")
+    cursor.execute("""
+        UPDATE  
+    """
+    +tbn2
+    + """
+    SET
+    """
+    + col_to_set
+    + """
+        WHERE  
+    """
+    + cond_to_set
+    + ";")
+    # return cursor.fetchall()
+
+    
+
+    
+
 root = tkinter.Tk()
 tbname = None
 label_ins = None
@@ -35,7 +66,7 @@ APP_WIDTH = 1000
 t = None
 
 def create():
-    global root, tbname, label_ins, t
+    global root, tbname, label_ins, t, tbname2, setwhat, wherewhat
 
     root.configure(bg="pink")
     root.title("COD")
@@ -80,6 +111,79 @@ def create():
     label_wtd = tkinter.Label(root, text="Enter the table name", bg="white")
     label_wtd.grid(row=6, column=0)
 
+
+    #update frame
+
+    frame1=Frame(root,bg = "yellow",bd=10,width=APP_WIDTH,height=50,cursor = "target")
+    frame1.grid(row=10, column=0)
+
+    label_upd = tkinter.Label(frame1, text="UPDATE: ", bg="white")
+    label_upd.grid(row=10, column=0)
+
+    tbname2 = tkinter.Text(frame1,height = 2, width = 10)
+    tbname2.grid(row=10, column=2)
+
+    label_set = tkinter.Label(frame1, text="SET: ", bg="white")
+    label_set.grid(row=10, column=4)
+
+    setwhat = tkinter.Text(frame1,height = 2, width = 10)
+    setwhat.grid(row=10, column=6)
+
+    label_where = tkinter.Label(frame1, text="WHERE: ", bg="white")
+    label_where.grid(row=10, column=8)
+
+    wherewhat = tkinter.Text(frame1,height = 2, width = 10)
+    wherewhat.grid(row=10, column=10)
+
+    upateButton = tkinter.Button(frame1, text = "Update!", command= update_query)
+    upateButton.grid(row=10, column=11)
+
+
+    #insert frame
+    frame2=Frame(root,bg = "green",bd=10,width=APP_WIDTH,height=50,cursor = "target")
+    frame2.grid(row=11, column=0)
+
+    label_insert = tkinter.Label(frame2, text="INSERT INTO: ", bg="white")
+    label_insert.grid(row=11, column=0)
+
+    tbname3 = tkinter.Text(frame2,height = 2, width = 10)
+    tbname3.grid(row=11, column=2)
+
+    label_values = tkinter.Label(frame2, text="VALUES: ", bg="white")
+    label_values.grid(row=11, column=5)
+
+    vals = tkinter.Text(frame2, height = 2, width = 10)
+    vals.grid(row=11, column=7)
+
+    insertButton = tkinter.Button(frame2, text = "Insert!", command= load_info)
+    insertButton.grid(row=11, column=9)
+
+
+    #delete frame
+    frame3=Frame(root,bg = "blue",bd=10,width=APP_WIDTH,height=50,cursor = "target")
+    frame3.grid(row=12, column=0)
+
+    label_del = tkinter.Label(frame3, text="DELETE FROM: ", bg="white")
+    label_del.grid(row=12, column=0)
+
+    tbname4= tkinter.Text(frame3,height = 2, width = 10)
+    tbname4.grid(row=12, column=2)
+
+    label_where2 = tkinter.Label(frame3, text="WHERE: ", bg="white")
+    label_where2.grid(row=12, column=5)
+
+    cond = tkinter.Text(frame3, height = 2, width = 10)
+    cond.grid(row=12, column=7)
+
+    delButton = tkinter.Button(frame3, text = "Delete!", command= load_info)
+    delButton.grid(row=12, column=9)
+
+
+
+
+
+
+
 create()
 
 
@@ -87,6 +191,5 @@ create()
 
 # label_upd = tkinter.Label(root, text="Update a record:", bg="white")
 # label_upd.grid(row=5, column=0)
-
 # main loop
 root.mainloop()
