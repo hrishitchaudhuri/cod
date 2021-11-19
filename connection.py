@@ -78,10 +78,15 @@ def get_tournament_from_position(cur, pos):
 
 ##############################################################################
 
-def print_table(cur, table):
-    cur.execute("""
-        SELECT * FROM
-        """ + table)
+def print_table(cur, table, cond=None, col='*'):
+    if cond != "":
+        cur.execute("""
+            SELECT """ + col + """ FROM
+            """ + table + """ WHERE """ + cond +";")
+    else:
+        cur.execute("""
+            SELECT """ + col + """ FROM
+            """ + table + ";")
     return_list = cur.fetchall()
     return [[str(j).strip() for j in i] for i in return_list]
     # return [[i.strip(), j.strip()] for i, j in return_list]
