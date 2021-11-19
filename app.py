@@ -20,6 +20,24 @@ def exit_app():
     else:
         pass
 
+def disp():
+    # t.display(get_federation_counts(cursor))
+    arg = qno.get(1.0, "end-1c")
+    q_no, a2= arg.split(", ")
+    q_no = int(q_no)
+    
+    if (qno==1):
+        t.display(get_games_by_player(cursor, a2))
+
+    elif (qno==2):
+        # a2 = int(a2)
+        t.display(get_games_by_year(cursor, a2))
+
+    elif (qno==3):
+        t.display(get_players_won_tournaments(cursor))
+
+    elif (qno==4):
+        t.display(get_federation_counts(cursor))
 
 
 def take_tbname():
@@ -93,7 +111,7 @@ APP_WIDTH = 1000
 t = None
 
 def create():
-    global root, tbname, label_ins, t, tbname2, setwhat, wherewhat, tbname3, vals, tbname4, cond
+    global root, tbname, label_ins, t, tbname2, setwhat, wherewhat, tbname3, vals, tbname4, cond, qno
 
     root.configure(bg="pink")
     root.title("COD")
@@ -205,6 +223,19 @@ def create():
     delButton = tkinter.Button(frame3, text = "Delete!", command= del_query)
     delButton.grid(row=12, column=9)
 
+    frame4=Frame(root,bg = "yellow",bd=10,width=APP_WIDTH,height=50,cursor = "target")
+    frame4.grid(row=14, column=0)
+
+    label_disp = tkinter.Label(frame4, text="View the pre-existing queries: \n 1. Info about all the game a player has played \n 2. All the tournaments held in a certain year \n 3. Info on all the players who have won a Tournament \n 4 Number of players in each federation \n 5. All the tournaments where the game reached a cettain position.\n", bg="white")
+    label_disp.grid(row=14, column=0)
+
+    qno= tkinter.Text(frame4,height = 2, width = 10)
+    qno.grid(row=15, column=2)
+
+    dispButton = tkinter.Button(frame4, text = "Display!", command= disp)
+    dispButton.grid(row=15, column=9)
+
+    
 
 
 
