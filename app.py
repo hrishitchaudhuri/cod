@@ -54,7 +54,34 @@ def update_query():
     + ";")
     # return cursor.fetchall()
 
-    
+def insert_query():
+    tbn3 = tbname3.get(1.0, "end-1c") 
+    values = vals.get(1.0, "end-1c")
+
+    cursor.execute(""" 
+        INSERT INTO 
+    """
+    + tbn3 
+    + """ 
+        VALUES(
+    """
+    + values 
+    + """)"""
+    + ";")
+
+def del_query():
+    tbn4= tbname4.get(1.0, "end-1c")
+    condition= cond.get(1.0, "end-1c")
+
+    cursor.execute(""" 
+        DELETE FROM 
+    """
+    + tbn4 
+    + """ 
+        WHERE
+    """
+    + condition 
+    + ";")
 
     
 
@@ -66,7 +93,7 @@ APP_WIDTH = 1000
 t = None
 
 def create():
-    global root, tbname, label_ins, t, tbname2, setwhat, wherewhat
+    global root, tbname, label_ins, t, tbname2, setwhat, wherewhat, tbname3, vals, tbname4, cond
 
     root.configure(bg="pink")
     root.title("COD")
@@ -155,7 +182,7 @@ def create():
     vals = tkinter.Text(frame2, height = 2, width = 10)
     vals.grid(row=11, column=7)
 
-    insertButton = tkinter.Button(frame2, text = "Insert!", command= load_info)
+    insertButton = tkinter.Button(frame2, text = "Insert!", command= insert_query)
     insertButton.grid(row=11, column=9)
 
 
@@ -175,7 +202,7 @@ def create():
     cond = tkinter.Text(frame3, height = 2, width = 10)
     cond.grid(row=12, column=7)
 
-    delButton = tkinter.Button(frame3, text = "Delete!", command= load_info)
+    delButton = tkinter.Button(frame3, text = "Delete!", command= del_query)
     delButton.grid(row=12, column=9)
 
 
